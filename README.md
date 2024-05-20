@@ -1,4 +1,4 @@
-docker compose up
+run command `docker compose up`
 
 .env sample
 ``` .env sample
