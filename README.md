@@ -1,5 +1,6 @@
 docker compose up
 
+.env sample
 ``` .env sample
 TOKEN=*
 RM_HOST=192.168.1.107
