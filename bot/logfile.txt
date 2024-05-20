@@ -1,0 +1,5 @@
+2024-05-20 21:20:27,116 - apscheduler.scheduler - INFO - Scheduler started
+2024-05-20 21:20:27,895 - root - INFO - Команда успешно выполнена
+2024-05-20 21:20:39,287 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2024-05-20 21:20:39,287 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2024-05-20 21:20:40,777 - telegram.ext.updater - WARNING - Exiting immediately!

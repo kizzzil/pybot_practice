@@ -2,21 +2,28 @@
 import logging
 import re
 import paramiko
-import logging
 import psycopg2
-
+import os
 from psycopg2 import Error
+from dotenv import load_dotenv, find_dotenv
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
 
 
-TOKEN = "7183572361:AAFUbhVj5ijhza3chIkoi3ZmQ8PTfyZpTsQ"
-SSH_HOST = "192.168.1.107"
-SSH_UNAME = "debian"
-SSH_PASSWD = "debian"
-DB_USER = "postgres"
-DB_PASS = "postgres"
-DB_HOST = "192.168.1.107"
+# dotenv_path = Path('../.env')
+# load_dotenv(dotenv_path=dotenv_path)
+load_dotenv()
+
+TOKEN = os.getenv('TOKEN')
+SSH_HOST = os.getenv('RM_HOST')
+SSH_PORT = os.getenv('RM_PORT')
+SSH_UNAME = os.getenv('RM_USER')
+SSH_PASSWD = os.getenv('RM_PASSWORD')
+DB_DATABASE = os.getenv('DB_DATABASE')
+DB_USER = os.getenv('DB_USER')
+DB_PASS = os.getenv('DB_PASSWORD')
+DB_HOST = os.getenv('DB_HOST')
+DB_PORT = os.getenv('DB_PORT')
 
 
 # Подключаем логирование
@@ -147,8 +154,8 @@ def get_emails(update: Update, context):
         connection = psycopg2.connect(user = DB_USER,
                                     password = DB_PASS,
                                     host = DB_HOST,
-                                    port = "5432", 
-                                    database = "db_bot")
+                                    port = DB_PORT, 
+                                    database = DB_DATABASE)
 
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM emails;")
@@ -173,8 +180,8 @@ def get_phone_numbers(update: Update, context):
         connection = psycopg2.connect(user = DB_USER,
                                     password = DB_PASS,
                                     host = DB_HOST,
-                                    port = "5432", 
-                                    database = "db_bot")
+                                    port = DB_PORT, 
+                                    database = DB_DATABASE)
 
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM phone_numbers;")
@@ -234,8 +241,8 @@ def insert_phone_number (update: Update, context):
             connection = psycopg2.connect(user = DB_USER,
                                         password = DB_PASS,
                                         host = DB_HOST,
-                                        port = "5432", 
-                                        database = "db_bot")
+                                        port = DB_PORT, 
+                                        database = DB_DATABASE)
 
             cursor = connection.cursor()
             cursor.execute(sql_query)
@@ -291,8 +298,8 @@ def insertEmail(update: Update, context):
             connection = psycopg2.connect(user = DB_USER,
                                         password = DB_PASS,
                                         host = DB_HOST,
-                                        port = "5432", 
-                                        database = "db_bot")
+                                        port = DB_PORT, 
+                                        database = DB_DATABASE)
 
             cursor = connection.cursor()
             cursor.execute(sql_query)
